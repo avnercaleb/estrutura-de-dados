@@ -1,16 +1,23 @@
 package vetores;
 
-public class Vetor {
+import java.lang.reflect.Array;
+
+public class Lista<T> {
 	
-	private Integer[] elementos;
+	private T[] elementos;
 	private Integer tamanho;
 	
-	public Vetor(Integer capacidade) {
-		this.elementos = new Integer[capacidade];
+	public Lista(Integer capacidade) {
+		this.elementos = (T[]) new Object[capacidade];
 		this.tamanho = 0;
 	}
 	
-	public boolean adicionar(Integer novoElemento) {
+	public Lista(Integer capacidade, Class<T> tipoClasse) {
+		this.elementos = (T[]) Array.newInstance(tipoClasse, capacidade);
+		this.tamanho = 0;
+	}
+	
+	public boolean adicionar(T novoElemento) {
 		this.aumentarCapacidade();
 		if(this.tamanho < this.elementos.length) {
 			this.elementos[this.tamanho] = novoElemento;
@@ -21,7 +28,7 @@ public class Vetor {
 		}
 	}
 	
-	public void adicionar(int posicao, int elemento) {
+	public void adicionar(int posicao, T elemento) {
 		if(!(posicao >= 0 && posicao < tamanho)) {
 			throw new IllegalArgumentException("A posicao não existe no vetor");
 		}
@@ -52,7 +59,7 @@ public class Vetor {
 		return this.elementos[posicao].toString();
 	}
 	
-	public Integer buscarElemento(int elemento) {
+	public Integer buscarElemento(T elemento) {
 		for(int i = 0; i < tamanho; i++) {
 			if(this.elementos[i] == elemento) return i;
 		}
@@ -81,7 +88,7 @@ public class Vetor {
 
 	private void aumentarCapacidade() {
 		if(tamanho == elementos.length) {
-			Integer[] novoVetor = new Integer[elementos.length * 2];
+			T[] novoVetor = (T[]) new Object[this.elementos.length * 2];
 			
 			for(int i = 0; i < tamanho; i++) {
 				novoVetor[i] = elementos[i];

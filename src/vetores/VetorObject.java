@@ -1,16 +1,16 @@
 package vetores;
 
-public class Vetor {
+public class VetorObject {
 	
-	private Integer[] elementos;
+	private Object[] elementos;
 	private Integer tamanho;
 	
-	public Vetor(Integer capacidade) {
-		this.elementos = new Integer[capacidade];
+	public VetorObject(Integer capacidade) {
+		this.elementos = new Object[capacidade];
 		this.tamanho = 0;
 	}
 	
-	public boolean adicionar(Integer novoElemento) {
+	public boolean adicionar(Object novoElemento) {
 		this.aumentarCapacidade();
 		if(this.tamanho < this.elementos.length) {
 			this.elementos[this.tamanho] = novoElemento;
@@ -21,7 +21,7 @@ public class Vetor {
 		}
 	}
 	
-	public void adicionar(int posicao, int elemento) {
+	public void adicionar(int posicao, Object elemento) {
 		if(!(posicao >= 0 && posicao < tamanho)) {
 			throw new IllegalArgumentException("A posicao não existe no vetor");
 		}
@@ -52,7 +52,7 @@ public class Vetor {
 		return this.elementos[posicao].toString();
 	}
 	
-	public Integer buscarElemento(int elemento) {
+	public int buscarElemento(Object elemento) {
 		for(int i = 0; i < tamanho; i++) {
 			if(this.elementos[i] == elemento) return i;
 		}
@@ -81,7 +81,7 @@ public class Vetor {
 
 	private void aumentarCapacidade() {
 		if(tamanho == elementos.length) {
-			Integer[] novoVetor = new Integer[elementos.length * 2];
+			Object[] novoVetor = new Integer[elementos.length * 2];
 			
 			for(int i = 0; i < tamanho; i++) {
 				novoVetor[i] = elementos[i];
